@@ -1,15 +1,16 @@
-@import 'variables';
-@import 'fonts';
-@import 'buttons';
+@import 'variables.css';
+@import 'fonts.css';
+@import 'buttons.css';
 
-@import 'header';
-@import 'logo';
-@import 'menu';
-@import 'main';
-@import 'post';
-@import 'pagination';
-@import 'footer';
+@import 'header.css';
+@import 'logo.css';
+@import 'menu.css';
+@import 'main.css';
+@import 'post.css';
+@import 'pagination.css';
+@import 'footer.css';
+@import "comment.css";
 
-@import 'archive';
+@import 'archive.css';
 
-@import 'prism';
+@import 'prism.css';

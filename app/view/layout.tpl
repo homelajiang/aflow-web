@@ -9,7 +9,7 @@
   <span class="header__inner">
 <a href="/" style="text-decoration: none;">
   <div class="logo">
-      <!--<img src="#" alt=""/>-->
+<!--      <img src="#" alt=""/>-->
       <span class="logo__mark">></span>
       <span class="logo__text">hello friend</span>
       <span class="logo__cursor"></span>
@@ -19,8 +19,7 @@
 <nav class="menu">
   <ul class="menu__inner">
       <li><a href="/">Home</a></li>
-      <li><a href="/tags">Categories & Tags</a></li>
-      <li><a href="/about">About</a></li>
+      <li><a href="/tags">Tags</a></li>
   </ul>
 </nav>
         <span class="menu-trigger">
@@ -63,7 +62,7 @@
             </a>
 
             <div class="copyright">
-                <span>© 2019 Powered by <a href="http://gohugo.io">homelajiang</a></span>
+                <span>© 2019 Powered by <a href="https://github.com/homelajiang">homelajiang</a></span>
                 <span>Theme created by <a href="https://twitter.com/panr">panr</a></span>
             </div>
         </div>

@@ -25,7 +25,6 @@
         {% endif %}-->
     <!--content-->
     <div class="post-content">
-        <!-- todo  需要解决转义问题-->
         {% markdown %}
         {{post.content | safe}}
 
@@ -57,24 +56,23 @@
     </div>
     {% endif %}
 
-    <div class="posts post on-list">
-
-        <h3>评论（{{comments.count}}）</h3>
+    <div class="comments">
+        <div class="comments-divider">
+            <h3>评论（{{comments.count}}）</h3>
+        </div>
 
         {% for comment in comments.list %}
-        <div style="padding: 20px;">
-            <div style="display: flex;">
-                <img style="width: 40px;height: 40px; border-radius:50%;"
-                     src="{{comment.creator.img if comment.creator.img else '/public/img/default_avatar.png'}}">
-                <div style="padding: 0 20px;">
-                    <div>
-                        <span style="vertical-align:middle;"><b>{{comment.creator.name}}</b></span>&nbsp;
-                        <span style="opacity: .5;font-size: .8rem;">{{comment.create_date}}</span>
-                    </div>
+        <div class="comment">
+            <img class="comment-avatar"
+                 src="{{comment.creator.img if comment.creator.img else '/public/img/default_avatar.png'}}">
+            <div>
+                <div>
+                    <span class="comment-name">{{comment.creator.name}}</span>&nbsp;
+                    <span class="comment-datetime">{{comment.create_date}}</span>
+                </div>
 
-                    <div style="font-size: .9rem;margin-top: 5px;">
-                        {{comment.content}}
-                    </div>
+                <div class="comment-content">
+                    {{comment.content}}
                 </div>
             </div>
         </div>
@@ -87,46 +85,56 @@
 
 
         {% if post.open_comment %}
-        <div style="margin-top: 60px;">
-            <h3>发表评论</h3>
-            <div>您的留言 （电子邮件地址不会被公开。）</div>
+        <div class="">
+            <div class="comments-divider">
+                <h3>发表评论</h3>
+                （电子邮件地址不会被公开）
+            </div>
 
             <form action="{{'/post/'+post.id}}" method="post">
-                <textarea placeholder="发表你的看法" rows="8" name="content"
-                          style="padding: 10px;width: 100%;border-radius: 5px;font-size:1.1rem;margin-top: 10px;"></textarea>
 
                 <div>
-                    <div style="margin-top: 15px;margin-bottom: 5px;">
-                        <label>您的称呼</label>
+                    <label>评论内容
+                        <span class="required">*</span>
+                    </label>
+                </div>
+
+                <textarea rows="8" name="content" class="comments-textarea"></textarea>
+
+                <div>
+                    <div class="comments-label">
+                        <label>你的名称
+                            <span class="required">*</span>
+                        </label>
                     </div>
-                    <input style="padding: 5px;border:1px solid #d3d3d3;border-radius: 2px;font-size: 1rem;"
+                    <input style="padding: 10px;border:1px solid #d3d3d3;border-radius: 3px;font-size: 1rem;"
                            name="name"
-                           size="30"
-                           placeholder="称呼（必填）">
+                           size="30">
                 </div>
 
                 <div>
-                    <div style="margin-top: 15px;margin-bottom: 5px;">
-                        <label>电子邮箱</label>
+                    <div class="comments-label">
+                        <label>电子邮箱
+                            <span class="required">*</span>
+                        </label>
                     </div>
-                    <input style="padding: 5px;border:1px solid #d3d3d3;border-radius: 2px;font-size: 1rem;"
+                    <input style="padding: 10px;border:1px solid #d3d3d3;border-radius: 3px;font-size: 1rem;"
                            size="30"
-                           name="email"
-                           placeholder="邮箱（必填）">
+                           name="email">
                 </div>
 
                 <div>
-                    <div style="margin-top: 15px;margin-bottom: 5px;">
-                        <label>个人网址</label>
+                    <div class="comments-label">
+                        <label>个人站点</label>
                     </div>
-                    <input style="padding: 5px;border:1px solid #d3d3d3;border-radius: 2px;font-size: 1rem;"
+                    <input style="padding: 10px;border:1px solid #d3d3d3;border-radius: 3px;font-size: 1rem;"
                            size="30"
-                           name="host"
-                           placeholder="主页（选填）">
+                           name="host">
                 </div>
 
-                <input style="border:1px solid #d3d3d3;width: 10em;padding: 4px 0;margin-top: 20px;" type="submit"
-                       value="发表">
+                <input style="border:1px solid #d3d3d3;width: 10em;padding: 10px 0;margin-top: 20px;border-radius: 3px;font-size: 1rem;"
+                       type="submit"
+                       value="发表评论">
 
             </form>
         </div>

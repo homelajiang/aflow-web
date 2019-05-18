@@ -26,8 +26,15 @@ class BlogController extends Controller {
     let result;
 
     const postInfo = await ctx.service.blog.getPost(postId);
-    // todo 文章不存在处理 (错误处理)
+
+    if (postInfo.error) {
+      this.ctx.throw(postInfo.code, postInfo.message);
+    }
+
     // TODO 判断文章私密度
+    // if (postInfo.open === 1) { // 加密
+    // }
+
     const aroundPost = await ctx.service.blog.getAroundPost(postId);
     const comments = await ctx.service.blog.getComments(postId, 1, 10);
 
@@ -70,7 +77,7 @@ class BlogController extends Controller {
     try {
       this.ctx.validate(createRule, ctx.request.body);
     } catch (e) {
-      ctx.body = await ctx.renderString("参数验证失败");
+      ctx.body = await ctx.renderString('参数验证失败');
       return;
     }
 
@@ -113,7 +120,7 @@ class BlogController extends Controller {
     if (posts.error) {
       results = { error: posts.message };
     } else {
-      results = { archives: [ { _id: this.ctx.params.tagName, count: posts.length, posts: posts } ] };
+      results = { archives: [{ _id: this.ctx.params.tagName, count: posts.length, posts: posts }] };
     }
     await this.ctx.render('search.tpl', results);
   }
@@ -126,7 +133,7 @@ class BlogController extends Controller {
     if (posts.error) {
       results = { error: posts.message };
     } else {
-      results = { archives: [ { _id: this.ctx.params.categoriesName, count: posts.length, posts: posts } ] };
+      results = { archives: [{ _id: this.ctx.params.categoriesName, count: posts.length, posts: posts }] };
     }
     await this.ctx.render('search.tpl', results);
   }
@@ -139,7 +146,7 @@ class BlogController extends Controller {
     if (posts.error) {
       results = { error: posts.message };
     } else {
-      results = { archives: [ { _id: this.ctx.query.key, count: posts.length, posts: posts } ] };
+      results = { archives: [{ _id: this.ctx.query.key, count: posts.length, posts: posts }] };
     }
     await this.ctx.render('search.tpl', results);
   }

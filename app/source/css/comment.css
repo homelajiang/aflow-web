@@ -1,0 +1,52 @@
+.comments {
+    &-divider {
+        margin-top: 60px;
+        display: flex;
+        align-items: baseline;
+    }
+
+    &-label {
+        margin-top: 15px;
+        margin-bottom: 5px;
+    }
+
+    &-textarea {
+        padding: 10px;
+        width: 100%;
+        border-radius: 3px;
+        font-size: 1.1rem;
+        margin-top: 10px;
+    }
+}
+
+.comment {
+    padding: 20px;
+    display: flex;
+
+    &-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
+    &-name {
+        margin-left: 20px;
+        font-weight: 600;
+    }
+
+    &-datetime {
+        opacity: .5;
+        font-size: .8rem;
+    }
+
+    &-content {
+        font-size: .9rem;
+        margin-top: 5px;
+        margin-left: 20px;
+    }
+}
+
+.comment-publish {
+
+
+}
