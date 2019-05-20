@@ -1,18 +1,18 @@
 {% extends "layout.tpl" %}
 {% block content %}
 
-<div class="posts post on-list">
+<div class="post">
     {% for archive in list %}
     <section id="archive" class="archive">
-        <div class="collection-title">
-            <h2 class="archive-year">{{archive._id}}</h2>
+        <div class="archive__group-year-header">
+            <h2>{{archive._id}}</h2>
         </div>
         {% for post in archive.posts %}
-        <div class="post-meta">
-            <span class="post_date">
-                {{post.publish_date}}
+        <div class="archive__post">
+            <span class="archive__post-date">
+                {{post.publish_date | date('MM-DD') }}
             </span>
-            <span class="more-meta" style="margin-left: 10px;">
+            <span class="archive__post-title">
               <a href="/post/{{post.id}}" class="archive-post-link">
                   {{post.title}}
               </a>

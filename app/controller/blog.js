@@ -108,7 +108,7 @@ class BlogController extends Controller {
   async archive() {
     const { ctx } = this;
     const num = ctx.params.pageNo ? ctx.params.pageNo : '1';
-    const archives = await ctx.service.blog.getArchives(num, 15);
+    const archives = await ctx.service.blog.getArchives(num, 5);
     await this.ctx.render('archives.tpl', archives);
   }
 

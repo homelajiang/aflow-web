@@ -40,17 +40,21 @@
         </div>
         <div class="pagination__buttons">
             {% if previous %}
+            <span class="button previous" style="background: transparent;">
             <a href="/post/{{previous.id}}">
                 <span class="button__icon">←</span>
                 <span class="button__text">{{previous.title}}</span>
             </a>
+         </span>
             {% endif %}
 
             {% if next %}
+            <span class="button next" style="background: transparent;">
             <a href="/post/{{next.id}}">
                 <span class="button__text">{{next.title}}</span>
                 <span class="button__icon">→</span>
             </a>
+            </span>
             {% endif %}
         </div>
     </div>
@@ -107,9 +111,7 @@
                             <span class="required">*</span>
                         </label>
                     </div>
-                    <input style="padding: 10px;border:1px solid #d3d3d3;border-radius: 3px;font-size: 1rem;"
-                           name="name"
-                           size="30">
+                    <input class="comments-input" name="name" size="30">
                 </div>
 
                 <div>
@@ -118,23 +120,17 @@
                             <span class="required">*</span>
                         </label>
                     </div>
-                    <input style="padding: 10px;border:1px solid #d3d3d3;border-radius: 3px;font-size: 1rem;"
-                           size="30"
-                           name="email">
+                    <input class="comments-input" size="30" name="email">
                 </div>
 
                 <div>
                     <div class="comments-label">
                         <label>个人站点</label>
                     </div>
-                    <input style="padding: 10px;border:1px solid #d3d3d3;border-radius: 3px;font-size: 1rem;"
-                           size="30"
-                           name="host">
+                    <input class="comments-input" size="30" name="host">
                 </div>
 
-                <input style="border:1px solid #d3d3d3;width: 10em;padding: 10px 0;margin-top: 20px;border-radius: 3px;font-size: 1rem;"
-                       type="submit"
-                       value="发表评论">
+                <input class="comments-submit" type="submit" value="发表评论">
 
             </form>
         </div>

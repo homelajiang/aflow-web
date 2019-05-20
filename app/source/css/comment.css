@@ -16,6 +16,56 @@
         border-radius: 3px;
         font-size: 1.1rem;
         margin-top: 10px;
+        background: var(--light-background);
+        border: 1px solid var(--light-border-color);
+        color: inherit;
+
+        .dark-theme & {
+            background: var(--dark-background);
+            border: 1px solid var(--dark-border-color);
+            color: inherit;
+        }
+    }
+
+    &-input {
+        padding: 10px;
+        border-radius: 3px;
+        width: 50%;
+        font-size: 1rem;
+        background: var(--light-background);
+        border: 1px solid var(--light-border-color);
+        color: inherit;
+
+        @media (--tablet) {
+            width: 50%;
+        }
+
+        @media (--phone) {
+            width: 100%;
+        }
+
+        .dark-theme & {
+            background: var(--dark-background);
+            border: 1px solid var(--dark-border-color);
+            color: inherit;
+        }
+    }
+
+    &-submit {
+        width: 10em;
+        padding: 10px 0;
+        margin-top: 20px;
+        border-radius: 3px;
+        font-size: 1rem;
+        background: var(--light-background-secondary);
+        border: 1px solid var(--light-border-color);
+        color: inherit;
+
+        .dark-theme & {
+            background: var(--dark-background-secondary);
+            border: 1px solid var(--dark-border-color);
+            color: inherit;
+        }
     }
 }
 
