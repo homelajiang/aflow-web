@@ -30,33 +30,34 @@
     {% else %}
     <h2>{{error}}</h2>
     {% endfor %}
-</div>
 
-{% if hasPrePage or hasNextPage %}
-<!--pagination-->
-<div class="pagination">
-    <div class="pagination__buttons">
-        {% if hasPrePage %}
-        <span class="button previous">
+    {% if hasPrePage or hasNextPage %}
+    <!--pagination-->
+    <div class="pagination">
+        <div class="pagination__buttons">
+            {% if hasPrePage %}
+            <span class="button previous" style="background: transparent;">
         <a href="/page/{{prePage}}">
           <span class="button__icon">←</span>
           <span class="button__text">Newer posts</span>
         </a>
       </span>
-        {% endif %}
+            {% endif %}
 
-        {% if hasNextPage %}
-        <span class="button next">
+            {% if hasNextPage %}
+            <span class="button next" style="background: transparent;">
         <a href="/page/{{nextPage}}">
-<!--            todo 按钮样式问题-->
           <span class="button__text">Older posts</span>
           <span class="button__icon">→</span>
         </a>
       </span>
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
+    <!--pagination-->
+    {% endif %}
+
 </div>
-<!--pagination-->
-{% endif %}
+
 
 {% endblock %}
