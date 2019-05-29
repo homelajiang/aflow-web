@@ -2,9 +2,17 @@ sudo: false
 language: node_js
 node_js:
   - '8'
+
+# 字段用来指定安装脚本。
 install:
-  - npm i npminstall && npminstall
+  - npm install --only=dev
+  - npm run build
+  - rm -rf node_modules/
+  - npm install --production
+  - tar -zcvf ../release.taz .
+
+# 字段用来指定构建或测试脚本。
 script:
-  - npm run ci
-after_script:
-  - npminstall codecov && codecov
+  - npm -v
+#after_script:
+#  - npminstall codecov && codecov

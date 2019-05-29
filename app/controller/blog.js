@@ -36,7 +36,8 @@ class BlogController extends Controller {
     // }
 
     const aroundPost = await ctx.service.blog.getAroundPost(postId);
-    const comments = await ctx.service.blog.getComments(postId, 1, 10);
+    // TODO 评论显示问题，分页？
+    const comments = await ctx.service.blog.getComments(postId, 1, 100);
 
     result = {
       post: postInfo,
@@ -108,7 +109,7 @@ class BlogController extends Controller {
   async archive() {
     const { ctx } = this;
     const num = ctx.params.pageNo ? ctx.params.pageNo : '1';
-    const archives = await ctx.service.blog.getArchives(num, 5);
+    const archives = await ctx.service.blog.getArchives(num, 10);
     await this.ctx.render('archives.tpl', archives);
   }
 
