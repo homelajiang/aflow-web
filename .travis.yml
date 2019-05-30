@@ -27,7 +27,6 @@ deploy:
   on:
     repo: homelajiang/aflow-web
     tags: true
-    branch: master
 after_deploy:
 - scp $PACKAGE_PATH ${SERVER_SSH}:~/release.tgz
 - ssh ${SERVER_SSH} 'mkdir -p release && cd release && rm -rf * && cd .. && tar -zxvf
