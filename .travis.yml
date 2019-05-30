@@ -9,7 +9,7 @@ before_install:
 install:
 - npm install
 script:
-- npm run build
+- npm run webpack
 after_success:
 - rm -rf .git/ .idea/
 - npm prune --production
