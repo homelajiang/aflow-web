@@ -2,21 +2,39 @@ sudo: false
 language: node_js
 node_js:
   - '8'
+before_install:
+  - openssl aes-256-cbc -K $encrypted_24e8c62a750c_key -iv $encrypted_24e8c62a750c_iv
+    -in id_rsa.enc -out ~\/.ssh/id_rsa -d
+  - chmod 600 ~/.ssh/id_rsa
 install:
   - npm install
+script:
   - npm run build
-script: true
 after_success:
-  - rm -rf node_modules/ .git/ .idea/
-  - npm install --production
-  - tar -zcf ../release.tgz .
+  - rm -rf .git/ .idea/ # 删除无关的文件夹
+  - npm prune --production # 删除devDependencies
+  - npm run build-release # 压缩打包
+
+before_deploy:
+  - cp *-release.tgz ~
+  - export PACKAGE_PATH=$(readlink -f ~/*-release.tgz)
+  - echo $PACKAGE_PATH
+
 deploy:
   provider: releases
   api_key:
-    secure: VY0B3KPxFGZxcjd+E9kfD0nazmGhDzOwiXvL6Z9R/bgFQ3LG7/eEi0Nkd77B37jebr9SFoIXlvCpwFz9mglkN6dOeQxHMgnUV6n4wltsG1KRZJD5fj1rUcWqdZUOExunfzoxBhsDe1VrcyoZUUEPiWn72pD3jHlR6GnmGdXeoCh3nOCJhBr3uXGVNO/spZduZr6RhQICYYCijv29VVu6BzZS6DW4u8+tBeWEg771jKyBOnR6RudpQEmakrL+LF9ry5a+5+BID698dVxujB8MyUiyc+gmJLN4nAqkOc4AtxNAJ706Nh8KOX6lN7n8g8rfRQEaIfveL8yVT/2um7U27ZnFlAe5A/9kVqRp3zWEog+fDbGNU41KbFA7z8sZKgQ1SdUCFcQr4/Dy1HGU3zQx0MjxqnoaaU9Oh9c0xaPLre+tKE3LXarPlPAfwpkUac1yhTWqt4y6IxkSDE22VF6ZU7ovAkvkTXfAHh9H3mwEhxrEPqUtMY3y+cOexqoPIP6L1/M9T4nDgCQQwx6v3R00whLv5nCDiJLA0gmv3TyXswjywpEYU92r2mwxsADvpnPeXeEULcVaRAY4KpXb5vPgXOldAh25iwHljsJM6TmMvHLUbsX4bl5dUjf4NiMqHa+d9TRZ0kfmQ/Uh/dK5fmd9LFs3X+vX/EdFd8L/hhmDby8=
-  file: ../release.tgz
+    secure: $GITHUB_TOKEN
+  file: $PACKAGE_PATH
   skip_cleanup: true
   on:
     repo: homelajiang/aflow-web
     tags: true
     branch: master
+
+after_deploy:
+  - scp $PACKAGE_PATH ${SERVER_SSH}:~/release.tgz # 复制到生产环境
+  - ssh ${SERVER_SSH} 'mkdir -p release && cd release && rm -rf * && cd .. && tar -zxvf release.tgz -C release' # 解压
+  - ssh ${SERVER_SSH} 'cd release && npm stop && npm start'
+
+addons:
+  ssh_known_hosts: ${SERVER_HOST}

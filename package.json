@@ -1,6 +1,6 @@
 {
-  "name": "AFlowWeb",
-  "version": "1.0.0",
+  "name": "aflow-web",
+  "version": "0.0.1",
   "description": "",
   "private": true,
   "dependencies": {
@@ -76,8 +76,9 @@
     "lint": "eslint .",
     "ci": "npm run lint && npm run cov",
     "autod": "autod",
-    "build": "webpack --mode=production",
-    "build-dev": "webpack --mode=development --watch"
+    "webpack": "webpack --mode=production",
+    "webpack-watch": "webpack --mode=development --watch",
+    "build-release": "tar -zcf $npm_package_name-$npm_package_version-release.tgz *"
   },
   "ci": {
     "version": "8"
