@@ -25,7 +25,6 @@ before_deploy:
       file: "$PACKAGE_PATH"
       skip_cleanup: true
       on:
-        repo: homelajiang/aflow-web
         tags: true
 after_deploy:
   - scp $PACKAGE_PATH ${SERVER_SSH}:~/release.tgz
