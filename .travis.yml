@@ -21,7 +21,7 @@ before_deploy:
 deploy:
   provider: releases
   api_key:
-    secure: ${GITHUB_TOKEN}
+    secure: Vx/IzUcmRm+cSrdsTVChMfeBxGtVXL04AhN5OO8KMCI6l73QVwD17NISi1NTn4PovXVqm0vqip9gYZCknwXTtbCpKJPF/VFJd1DcOoBFy8yGK4gfWuNPngmWdHZNw97g51uwN8Jps73/Mb3oILbzWFbfhboghtjld4A6lTxVJVrp3zTxbw365THawg7j7HuK7jt9Jsfgqt70axTVd8tGvuz7leN3WbZdSSeYM0mCyEHLteufoeaq8yYBRF8/RLIS+T7AyP3XRdls8h02O3UIob4grlLVhY+vFJnA+IUzByzI2fh7Hph4I8Vx07nRg4vxjh5NHbb44gqSCPN0480TElkaX/rwF8bGDidgRpg3CCBeIF0gfYtClezdg4raZXv2t1POEdCpeglQUWRv7q0vL/mLK2b4j1CNVLf/UGzZ+x6jssOdD+S1GbFpZyuYDfiNJooPZTEznh29sKz6A7F7d5iBjWBIK0UsQNrjMLLJqW917+RhWyTfrZZ72uKz6hBCPpDaEIxteN7UA0MqthPZihWLZIPAHTPXwdcxD1eM0yDKOfbZT+f/U5MAixotPGFtVlD2UFi7QsQH/2F4w4uCS24cxkWhhNprNIzjJkXJwQh9d153tohn//3PdTQm0N+csoU+qZhxD4sNv3CxshWDlChzbyS9fdXQbRLiRHC/iao=
   file: "$PACKAGE_PATH"
   skip_cleanup: true
   on:
