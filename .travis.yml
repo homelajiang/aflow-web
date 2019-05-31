@@ -32,4 +32,4 @@ after_deploy:
     release.tgz -C release'
   - ssh ${SERVER_SSH} 'cd release && npm stop && npm start'
 addons:
-  ssh_known_hosts: "${SERVER_HOST}"
+  ssh_known_hosts: ${SERVER_HOST}
