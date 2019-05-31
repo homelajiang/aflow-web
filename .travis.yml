@@ -1,36 +1,36 @@
 sudo: false
 language: node_js
 node_js:
-- '8'
+  - '8'
 before_install:
-- openssl aes-256-cbc -K $encrypted_57d064015c3e_key -iv $encrypted_57d064015c3e_iv
-  -in id_rsa.enc -out ~/.ssh/id_rsa -d
-- chmod 600 ~/.ssh/id_rsa
+  - openssl aes-256-cbc -K $encrypted_57d064015c3e_key -iv $encrypted_57d064015c3e_iv
+    -in id_rsa.enc -out ~/.ssh/id_rsa -d
+  - chmod 600 ~/.ssh/id_rsa
 install:
-- npm install
+  - npm install
 script:
-- npm run webpack
+  - npm run webpack
 after_success:
-- rm -rf .git/ .idea/
-- npm prune --production
-- npm run build-release
+  - rm -rf .git/ .idea/
+  - npm prune --production
+  - npm run build-release
 before_deploy:
-- cp *-release.tgz ~
-- export PACKAGE_PATH=$(readlink -f ~/*-release.tgz)
-- echo $PACKAGE_PATH
-deploy:
-  provider: releases
-  api_key:
-    secure: $GITHUB_TOKEN
-  file: "$PACKAGE_PATH"
-  skip_cleanup: true
-  on:
-    repo: homelajiang/aflow-web
-    tags: true
+  - cp *-release.tgz ~
+  - export PACKAGE_PATH=$(readlink -f ~/*-release.tgz)
+  - echo $PACKAGE_PATH
+  - deploy:
+      provider: releases
+      api_key:
+        secure: ${GITHUB_TOKEN}
+      file: "$PACKAGE_PATH"
+      skip_cleanup: true
+      on:
+        repo: homelajiang/aflow-web
+        tags: true
 after_deploy:
-- scp $PACKAGE_PATH ${SERVER_SSH}:~/release.tgz
-- ssh ${SERVER_SSH} 'mkdir -p release && cd release && rm -rf * && cd .. && tar -zxvf
-  release.tgz -C release'
-- ssh ${SERVER_SSH} 'cd release && npm stop && npm start'
+  - scp $PACKAGE_PATH ${SERVER_SSH}:~/release.tgz
+  - ssh ${SERVER_SSH} 'mkdir -p release && cd release && rm -rf * && cd .. && tar -zxvf
+    release.tgz -C release'
+  - ssh ${SERVER_SSH} 'cd release && npm stop && npm start'
 addons:
   ssh_known_hosts: "${SERVER_HOST}"
